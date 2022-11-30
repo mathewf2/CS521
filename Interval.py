@@ -72,6 +72,13 @@ class Interval:
         self.lb, self.ub = self._mul(other)
         return self
 
+    # Not robust
+    def __pow__(self, other):
+        res = Interval(self.lb, self.ub)
+        while other := other - 1:
+            res *= res
+        return res
+
     def _truediv(self, other):
         if isinstance(other, Interval):
             l1, u1 = self
